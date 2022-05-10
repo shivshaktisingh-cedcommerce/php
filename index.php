@@ -15,3 +15,7 @@ echo $z;
 $a= "World";
 echo "<br>";
 echo "Welcome to the php $a";
+echo "<br>";
+$str1="Hello world!";
+$str2="Good morning !";
+echo $str1 . " " . $str2;
