@@ -69,3 +69,13 @@ for($i=1;$i<5;$i++)
     $a=$a*$i;
 }
 echo $a;
+
+
+echo "<br>";
+$original = array("1","2","3","4","5");
+$a=7;
+array_splice($original , 3,0,$a);
+foreach($original as $x){
+    echo "$x ";
+    
+}
