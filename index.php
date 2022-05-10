@@ -60,3 +60,12 @@ switch ($day) {
     default:
     echo "number greater than 7";
 }
+
+
+echo "<br>";
+$a=1;
+for($i=1;$i<5;$i++)
+{
+    $a=$a*$i;
+}
+echo $a;
