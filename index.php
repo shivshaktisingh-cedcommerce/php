@@ -19,27 +19,31 @@
     input[type=number]{
   width: 60%;
   padding: 12px 20px;
+  margin: 28px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-left:80px;
+}
+#convert{
+  width: 60%;
+  padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-}
-#width{
-  margin-left:1%;
-}
-#calculate{
-  width:40%;
-  margin-left:30%;
-  padding: 12px 20px;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  margin-left:80px;
 }
 #result{
-  margin-top:5%;
+  margin-top:10%;
+  margin-left:20%;
 }
+input[type=radio]{
+  margin-left:20%;
+}
+
 
    
     </style>
@@ -47,17 +51,24 @@
 </head>
 <body>
   <?php
-  $area = "";
-  $perimeter = "";
-  if(isset($_POST['calculate']))
-  {
-   $length = $_POST['length'];
-   $width = $_POST['width'];
-   
-   if(!empty($length) && !empty($width))
+  
+  if(isset($_POST['htm']))
+  { 
+   $operation = $_POST['htm'];
+   $numtoconvert = $_POST['insert'];
+   if(!empty($numtoconvert))
    {
-     $area = $length * $width;
-     $perimeter = 2 * ($length + $width); 
+     if($operation == 'htm'){ 
+       $a= "hours";
+       $b= "minutes";
+       $result = $numtoconvert * 60;
+      }
+      else{
+        $a="hours";
+        $b="seconds";
+        $result = $numtoconvert * 60 * 60;
+      }
+    
      
    }
   }
@@ -68,26 +79,27 @@
   <div id="outer">
     <div id="inner">
   <form method="post" action ="">
-  <span>Length of Rectangle</span>
-  <input type="number" id="length" name="length" placeholder="Enter length here">
-  <br>
-  
-  <br>
-  <span>Width of Rectangle</span>
-  <input type="number"  id="width" name="width" placeholder="Enter width here">
+ 
+  <input type="number" id="typetoconvert" name="insert">
   <br>
   <br>
-  <input type="submit"  name="calculate" id="calculate" value="Calculate Area and Perimeter">
-  
+  <input type="radio" id="htm" name="htm" value="htm">
+  <label for="htm">hour to mins</label><br><br>
+  <input type="radio" id="mts" name="htm" value="mts">
+  <label for="mts">minutes to second</label>
   <div id="result">
     <?php
-    echo "Area is ".$area. "sq. mtr.";
-    echo "<br>";
-    echo "<br>";
-    echo "Perimeter is ".$perimeter. "sq. mtr.";
+     echo "$numtoconvert  $a = $result   $b"; 
     ?>
     </div>
+    <br>
+    <br>
  
+  <input type="submit"  id="convert" name="convert" value="Convert">
+  <br>
+  <br>
+  
+  
   <br>
   <br>
   
