@@ -8,53 +8,59 @@
       
     }
     #inner{
-      width:30%;
-      height:20%;
+      width:50%;
+      height:40%;
       margin:auto;
       margin-top:10%;
       background-color:powderblue;
       padding:20px;
       
     }
-    #add {
-        margin-left:70px;
-    }
-    .same {
-       width:14%;
-       margin-top:10px;
-    }
-    #result{
-      margin-left:8%;
-    }
+    input[type=number]{
+  width: 60%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#width{
+  margin-left:1%;
+}
+#calculate{
+  width:40%;
+  margin-left:30%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#result{
+  margin-top:5%;
+}
+
+   
     </style>
   <title>Document</title>
 </head>
 <body>
   <?php
-   $result="";
-   $firstnum=$_POST['number1'];
-   $secondnum=$_POST['number2'];
-   $operator=$_POST['operator'];
-   if(!empty($firstnum) && !empty($secondnum))
+  $area = "";
+  $perimeter = "";
+  if(isset($_POST['calculate']))
+  {
+   $length = $_POST['length'];
+   $width = $_POST['width'];
+   
+   if(!empty($length) && !empty($width))
    {
-     switch ($operator)
-     {
-       case '+':
-        $result = $firstnum + $secondnum;
-        break;
-       case '-':
-          $result = $firstnum - $secondnum;
-          break;
-       case '*':
-          $result = $firstnum * $secondnum;
-          break;
-       case '/':
-          $result = $firstnum / $secondnum;
-          break;
-     }
+     $area = $length * $width;
+     $perimeter = 2 * ($length + $width); 
      
    }
-  
+  }
 
 
   ?>
@@ -62,20 +68,26 @@
   <div id="outer">
     <div id="inner">
   <form method="post" action ="">
-  <label for="fnum">Number 1:</label>
-  <input type="number" id="number1" name="number1" placeholder="Enter first number here">
+  <span>Length of Rectangle</span>
+  <input type="number" id="length" name="length" placeholder="Enter length here">
+  <br>
+  
+  <br>
+  <span>Width of Rectangle</span>
+  <input type="number"  id="width" name="width" placeholder="Enter width here">
   <br>
   <br>
-  <label for="snum">Number 2:</label>
-  <input type="number"  id="number2" name="number2" placeholder="Enter second number here">
-  <br>
-  <br>
-  <label for="result">Result:</label>
-  <input readonly="readonly" name="result" id="result" value="<?php echo $result; ?>"> 
-  <input type="submit" class="same" name="operator" id="add" value="+">
-  <input type="submit" class="same" name="operator" id="subtract" value="-">
-  <input type="submit" class="same" name="operator" id="divide" value="/">
-  <input type="submit" class="same" name="operator" id="multiply" value="*">
+  <input type="submit"  name="calculate" id="calculate" value="Calculate Area and Perimeter">
+  
+  <div id="result">
+    <?php
+    echo "Area is ".$area. "sq. mtr.";
+    echo "<br>";
+    echo "<br>";
+    echo "Perimeter is ".$perimeter. "sq. mtr.";
+    ?>
+    </div>
+ 
   <br>
   <br>
   
