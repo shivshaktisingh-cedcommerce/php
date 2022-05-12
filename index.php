@@ -1,72 +1,87 @@
+<!DOCTYPE html>
 <html>
-  <head>
-  
-      
-  </head>
-  <body>
-
-  <?php
-  if(isset($_POST['unit_submit']))
-  {
-    $units = $_POST['units'];
-    if(!empty($units)){
-      $result = calculate_bill($units);
-    }
-  }
-  function calculate_bill($units)
-  {
-    if($units<50)
-    {
-      $bill=3.50 * $units;
-    }
-    else if($units>50 && $units<150)
-    {
-       $temp=50 * 3.50; 
-       $bill= $temp + (4 * ($units-50));
-    }
-    else if($units>150 && $units<250)
-    { 
-       $temp=(50 * 3.50) + (100 *4);
-       $bill= $temp + (5.20 * ($units -150));
-    }
-    else if($units>250)
-    {
-       $temp=(50 * 3.50) + (100 * 4) + (100 * 5.20);
-       $bill = $temp + (($units-250)*6.50);;
-    }
-    return $bill;
-  }
-  ?>
-  <div id="outer" style>
-    <div id="bill">
-    <form method="post" action="">
-      <input type="number" name="units" id="units" placeholder="Enter Unit Here">
-      <input type="submit" name="unit_submit" id="unit-submit" value="submit">
-    </form>
-    </div>
-    <div id="result">
-      <?php
-      echo "your electricity bill is $result";
-      ?>
-</div>
-
-</div>
+<head>
   <style>
-    #outer {
+    #outer{
       width:100%;
       height:100%;
-      background-color:lightgray;
-      float:left;
-    }
-    #bill {
-      margin-top:100px;
-      margin-left:200px;
       
     }
-    #result {
-      margin-top:10px;
-      margin-left:200px;
+    #inner{
+      width:30%;
+      height:20%;
+      margin:auto;
+      margin-top:10%;
+      background-color:powderblue;
+      padding:20px;
+      
     }
-  </style>
-  </body>
+    #add {
+        margin-left:70px;
+    }
+    .same {
+       width:14%;
+       margin-top:10px;
+    }
+    #result{
+      margin-left:8%;
+    }
+    </style>
+  <title>Document</title>
+</head>
+<body>
+  <?php
+   $result="";
+   $firstnum=$_POST['number1'];
+   $secondnum=$_POST['number2'];
+   $operator=$_POST['operator'];
+   if(!empty($firstnum) && !empty($secondnum))
+   {
+     switch ($operator)
+     {
+       case '+':
+        $result = $firstnum + $secondnum;
+        break;
+       case '-':
+          $result = $firstnum - $secondnum;
+          break;
+       case '*':
+          $result = $firstnum * $secondnum;
+          break;
+       case '/':
+          $result = $firstnum / $secondnum;
+          break;
+     }
+     
+   }
+  
+
+
+  ?>
+
+  <div id="outer">
+    <div id="inner">
+  <form method="post" action ="">
+  <label for="fnum">Number 1:</label>
+  <input type="number" id="number1" name="number1" placeholder="Enter first number here">
+  <br>
+  <br>
+  <label for="snum">Number 2:</label>
+  <input type="number"  id="number2" name="number2" placeholder="Enter second number here">
+  <br>
+  <br>
+  <label for="result">Result:</label>
+  <input readonly="readonly" name="result" id="result" value="<?php echo $result; ?>"> 
+  <input type="submit" class="same" name="operator" id="add" value="+">
+  <input type="submit" class="same" name="operator" id="subtract" value="-">
+  <input type="submit" class="same" name="operator" id="divide" value="/">
+  <input type="submit" class="same" name="operator" id="multiply" value="*">
+  <br>
+  <br>
+  
+</div>
+</div>
+    
+  
+</body>
 </html>
