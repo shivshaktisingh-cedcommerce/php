@@ -1,11 +1,13 @@
 <?php
 session_start();
-
-
-
 if(!isset($_SESSION['cart']))
-$_SESSION['cart']=array();
-?>
+{
+    $_SESSION['cart']=array();
+}
+ ?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,48 +37,38 @@ $_SESSION['cart']=array();
             
         </div>
         <?php
-        if(isset($_POST['submit']))
-        {
-            session_destroy();
-        }
-
-        if ( isset( $_GET['action'] ) && $_GET['action']=='add-to-cart'){
+        
+       if(isset($_GET['action']) && $_GET['action']=='add-to-cart')
+       {  
+       // $_SESSION['cart']=array(); 
          $id = $_GET['id'] ;
          $name = $_GET['name'];
          $price = $_GET['price'];
          $item=array("ID"=>$id,"Name"=>$name,"Price"=>$price);
          array_push($_SESSION['cart'],$item);
-        }
-
-      
-         ?>
-         
-         <div id="cart1">
-        <table>
-            <tr>
-                <td>Product Id</td>
-                <td>Product Name</td>
-                <td>Product Price</td>
-               
-            </tr>
-        <?php foreach($_SESSION['cart'] as $key=>$value){ ?>
-            <tr>
-                <td><?php echo $value['ID'] ?></td>
-                <td><?php echo $value['Name'] ?></td>
-                <td><?php echo $value['Price'] ?></td>
-               
-            </tr>
-            <?php } ?>
-       </table>
+         $txt="<table><tr><td>PRODUCT ID</td><td>PRODUCT NAME</td><td>PRODUCT PRICE</td></tr>";
+         foreach($_SESSION['cart'] as $key => $value)
+         {
+         $txt.="<td>".$value['ID']."</td>";
+         $txt.="<td>".$value['Name']."</td>";
+         $txt.="<td>".$value['Price']."</td>";
+         $txt.="</tr>";
+         }
+        $txt.="</table>";
+        echo $txt;
+       }
+        ?>
+     
        <form method="POST" action="">
-       <input type="submit" name ="submit" id="empty" value="Empty cart">
+       <a href="logout.php" name="submit1" id="empty"> Empty</a> 
         </form> 
        </div>
-        
-      
+     
+
       
        </div>
-
+   
+  
     </div>
     <?php include 'footer.php';?> 
         
